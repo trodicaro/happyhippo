@@ -3,23 +3,55 @@
   <head>
     <title>Happyhippos</title>
     <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta charset="utf-8" />
-    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
   </head>
 
   <body style="background-color:white;">
-    <div class="row">
-      <div class="col-sm-12 text-xs-center bootstrap-welcome">
-        <h1>Bootstrap 4 Works!</h1>
-        <p class="lead">Go ahead and build your awesome app now.</p>
-      </div>
-    </div>
-
     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+    <script type="text/javascript">
+    $(function () {
+      Highcharts.chart('container', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Monthly Voucher Distribution vs Use'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
+            title: {
+                text: 'Number of Vouchers'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Vouchers Given',
+            data: [70, 69, 95, 145, 184, 215, 252, 265, 233, 183, 139, 96]
+        }, {
+            name: 'Vouchers Claimed',
+            data: [39, 42, 57, 85, 119, 152, 170, 166, 142, 103, 66, 48]
+        }]
+      });
+
+    })
+    </script>
+  </body>
+
 </html>
 
 
