@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Happyhippos</title>
+    <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  </head>
+
+  <body>
+    <div id='container'>
+      <nav class="navbar navbar-light" style="background-color: #e3f2fd; navbar-toggleable-md navbar-light bg-faded">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="form-inline my-2 my-lg-0 pull-right">
+            <input class="form-control mr-sm-2" type="text" placeholder="Enter Zipcode">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter</button>
+          </form>
+        </div>
+      </nav>
+
+    <div class='row'>
+      <div class='col-lg-12'>
+        <div id="chart1" class='col-sm-6' style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <div id="chart2" class='col-sm-6' style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+      </div>
+    <div>
+    <div class='row'>
+      <div class='col-lg-12'>
+        <div id="chart3" class='col-sm-6' style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <div id="chart4" class='col-sm-6' style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+      </div>
+    <div>
+  </div>
+
+    <script type="text/javascript">
+      $(function () {
+        Highcharts.chart('chart1', {
+          chart: {
+              type: 'line'
+          },
+          title: {
+              text: 'Monthly Voucher Distribution vs Use'
+          },
+          xAxis: {
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+          },
+          yAxis: {
+              title: {
+                  text: 'Number of Vouchers'
+              }
+          },
+          plotOptions: {
+              line: {
+                  dataLabels: {
+                      enabled: true
+                  },
+                  enableMouseTracking: false
+              }
+          },
+          series: [{
+              name: 'Vouchers Given',
+              data: [70, 69, 95, 145, 184, 215, 252, 265, 233, 183, 139, 96]
+          }, {
+              name: 'Vouchers Claimed',
+              data: [39, 42, 57, 85, 119, 152, 170, 166, 142, 103, 66, 48]
+          }]
+        });
+      })
+
+      Highcharts.chart('chart2', {
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: 'pie'
+          },
+          title: {
+              text: 'September 2017 Fruit Consumption by Zip - 60004'
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: true,
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                      style: {
+                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Fruits',
+              colorByPoint: true,
+              data: [{
+                  name: 'Apples',
+                  y: 56.33
+              }, {
+                  name: 'Bananas',
+                  y: 24.03,
+                  sliced: true,
+                  selected: true
+              }, {
+                  name: 'Strawberries',
+                  y: 10.38
+              }, {
+                  name: 'Kiwi',
+                  y: 4.77
+              }, {
+                  name: 'Watermelon',
+                  y: 0.91
+              }, {
+                  name: 'Acai berries',
+                  y: 0.2
+              }]
+          }]
+      });
+
+
+      Highcharts.chart('chart3', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Percentage Blood Pressure Risk By Zip'
+        },
+        xAxis: {
+            categories: ['60004', '60005', '60006', '60007', '90210']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Percentage Blood Pressure Risk'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Low',
+            data: [50, 30, 40, 10, 20]
+        }, {
+            name: 'Average',
+            data: [30, 40, 40, 20, 50]
+        }, {
+            name: 'High',
+            data: [20, 20, 30, 30, 10]
+        }, ]
+      });
+
+      Highcharts.chart('chart4', {
+        chart: {
+            polar: true,
+            type: 'line'
+        },
+        title: {
+            text: 'Budget vs Spending',
+            x: -80
+        },
+        pane: {
+            size: '80%'
+        },
+        xAxis: {
+            categories: ['Staffing', 'Marketing', 'Development', 'Produce',
+                    'Transportation', 'Equipment'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0
+        },
+        yAxis: {
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0
+        },
+        tooltip: {
+            shared: true,
+            pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+        },
+        legend: {
+            align: 'right',
+            verticalAlign: 'top',
+            y: 70,
+            layout: 'vertical'
+        },
+        series: [{
+            name: 'Allocated Budget',
+            data: [80000, 19000, 42000, 35000, 40000, 10000],
+            pointPlacement: 'on'
+        }, {
+            name: 'Actual Spending',
+            data: [70000, 19000, 60000, 31000, 35000, 14000],
+            pointPlacement: 'on'
+        }]
+      });
+    </script>
+  </body>
+
+</html>
+
+
+
+
+
