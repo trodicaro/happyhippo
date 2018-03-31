@@ -1,6 +1,6 @@
 # README
 
-Start app for #hackhungerchi.
+Start app for #hackhungerchi. Event info: https://www.chicagosfoodbank.org/event/hackathon-end-hunger/.
 
 App live on: https://happyhippos.herokuapp.com/.
 
